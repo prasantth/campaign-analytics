@@ -3,20 +3,29 @@ from sqlalchemy.orm import declarative_base, sessionmaker
 import os
 from dotenv import load_dotenv
 from urllib.parse import quote_plus
-from utils.log import Log  # Import the Log class for logging
+from src.utils.log import Log
 
+# Load environment variables from .env
 load_dotenv()
 
 try:
+    # Load database connection details from the environment
     DB_NAME = os.getenv("DB_NAME")
     DB_USER = os.getenv("DB_USER")
-    DB_PASSWORD = quote_plus(os.getenv("DB_PASSWORD"))
+    DB_PASSWORD = os.getenv("DB_PASSWORD")
     DB_HOST = os.getenv("DB_HOST")
     DB_PORT = os.getenv("DB_PORT")
 
-    DATABASE_URL = f"postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+    # Conditionally include the password in the connection string
+    if DB_PASSWORD:
+        DB_PASSWORD = quote_plus(DB_PASSWORD)
+        DATABASE_URL = f"postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+    else:
+        DATABASE_URL = f"postgresql://{DB_USER}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
 
-    # Try to create the engine and session
+    print(f"Database URL: {DATABASE_URL}")
+
+    # Create the SQLAlchemy engine and session
     engine = create_engine(DATABASE_URL)
     SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
     Base = declarative_base()

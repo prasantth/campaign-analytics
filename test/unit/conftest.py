@@ -2,7 +2,7 @@ import pytest
 from fastapi.testclient import TestClient
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from app.database import Base, get_db
+from src.database.database import Base, get_db
 from main import app
 import psycopg2
 import os
@@ -87,22 +87,22 @@ def create_test_database():
 @pytest.fixture(scope="session", autouse=True)
 def setup_and_teardown_database():
     """
-    Set up the test database before running tests and tear down afterward.
+    Set up the test database before running test and tear down afterward.
     """
     create_test_database()  # Create the database if it doesn't exist
     # Create tables in the test database
     Base.metadata.create_all(bind=engine)
 
-    yield  # Run tests
+    yield  # Run test
 
-    # Drop the tables or the database after tests
+    # Drop the tables or the database after test
     Base.metadata.drop_all(bind=engine)
     drop_test_database()
 
 
 def drop_test_database():
     """
-    Drop the test database to clean up after tests.
+    Drop the test database to clean up after test.
     """
     try:
         conn = psycopg2.connect(

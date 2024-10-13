@@ -1,10 +1,10 @@
 from fastapi import APIRouter, HTTPException, Depends
 from sqlalchemy.orm import Session
-from app.models import Campaign, AdGroup, AdGroupStats
-from app.schemas import UpdateCampaignRequest
-from app.database import get_db
+from src.models.models import Campaign, AdGroup, AdGroupStats
+from src.schemas.schemas import UpdateCampaignRequest
+from src.database.database import get_db
 from sqlalchemy import func
-from utils.log import Log  # Import the Log class for logging
+from src.utils.log import Log  # Import the Log class for logging
 
 router = APIRouter()
 
@@ -32,16 +32,16 @@ def get_campaigns(db: Session = Depends(get_db)):
 
                 ad_group_data.append({
                     "ad_group_name": ad_group.ad_group_name,
-                    "average_cost": avg_cost,
-                    "average_conversions": avg_conversions
+                    "average_cost": round(avg_cost, 2),
+                    "average_conversions": round(avg_conversions, 2)
                 })
 
             result.append({
                 "campaign_name": campaign.campaign_name,
                 "number_of_ad_groups": len(ad_groups),
                 "ad_groups": ad_group_data,
-                "average_monthly_cost": total_cost / len(ad_groups) if ad_groups else 0,
-                "average_cost_per_conversion": total_cost / total_conversions if total_conversions > 0 else 0
+                "average_monthly_cost": round(total_cost / len(ad_groups) if ad_groups else 0, 2),
+                "average_cost_per_conversion": round(total_cost / total_conversions if total_conversions > 0 else 0, 2)
             })
 
         Log.INFO("Campaigns retrieved successfully.")

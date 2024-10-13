@@ -1,5 +1,4 @@
-import pytest
-from db_conn import create_connection
+from src.database.db_conn import create_connection
 
 def test_create_connection():
     """

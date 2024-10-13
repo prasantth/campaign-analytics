@@ -1,7 +1,7 @@
 from fastapi import FastAPI
-from app.database import Base, engine
-from app.routers import campaigns, performance
-from utils.log import Log
+from src.database.database import Base, engine
+from src.routers import campaigns, performance
+from src.utils.log import Log
 
 # Initialize the Logger
 Log.INFO("Starting the FastAPI app...")
@@ -17,5 +17,5 @@ app.include_router(performance.router)
 
 if __name__ == "__main__":
     import uvicorn
-    Log.INFO("Running the FastAPI app with Uvicorn...")  # Log application start
+    Log.INFO("Running the FastAPI app with Uvicorn...")
     uvicorn.run(app, host="0.0.0.0", port=8800)

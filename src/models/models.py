@@ -1,7 +1,7 @@
 from sqlalchemy import Column, Integer, String, Float, Date, ForeignKey
 from sqlalchemy.orm import relationship
-from app.database import Base
-from utils.log import Log  # Import the Log class for logging
+from src.database.database import Base
+from src.utils.log import Log  # Import the Log class for logging
 
 try:
     class Campaign(Base):

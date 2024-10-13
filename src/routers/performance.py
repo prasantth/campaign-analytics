@@ -1,12 +1,12 @@
 from fastapi import APIRouter, Query, Depends, HTTPException
 from sqlalchemy import func
 from sqlalchemy.orm import Session
-from app.analytics import get_performance_data, calculate_percentage_change
-from app.database import get_db
+from src.analytics.analytics import get_performance_data, calculate_percentage_change
+from src.database.database import get_db
 from datetime import datetime, timedelta
 from typing import Optional, List
-from app.models import AdGroupStats
-from utils.log import Log  # Import the Log class for logging
+from src.models.models import AdGroupStats
+from src.utils.log import Log  # Import the Log class for logging
 
 router = APIRouter()
 
@@ -50,10 +50,10 @@ def performance_time_series(
             total_impressions = result.total_impressions
             total_cost = result.total_cost
 
-            avg_cost_per_click = total_cost / total_clicks if total_clicks else 0
-            avg_cost_per_conversion = total_cost / total_conversions if total_conversions else 0
-            avg_ctr = total_clicks / total_impressions if total_impressions else 0
-            avg_conversion_rate = total_conversions / total_clicks if total_clicks else 0
+            avg_cost_per_click = round(total_cost / total_clicks if total_clicks else 0, 2)
+            avg_cost_per_conversion = round(total_cost / total_conversions if total_conversions else 0, 2)
+            avg_ctr = round(total_clicks / total_impressions if total_impressions else 0, 2)
+            avg_conversion_rate = round(total_conversions / total_clicks if total_clicks else 0, 2)
 
             time_series_data.append({
                 "period": result.period,

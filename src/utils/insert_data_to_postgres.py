@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Load Excel data
-file_path = 'Kaya_Hometask_Data_Nike.xlsx'
+file_path = './data/Kaya_Hometask_Data_Nike.xlsx'
 xls = pd.ExcelFile(file_path)
 
 # Load the sheets into DataFrames
