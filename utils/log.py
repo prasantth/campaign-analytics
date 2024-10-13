@@ -1,6 +1,7 @@
 import logging
 import os
 from datetime import datetime
+import inspect
 
 
 class Log:
@@ -17,42 +18,46 @@ class Log:
         return log_file
 
     @staticmethod
-    def setup_logger(level):
-        # Setup logger for the app
-        log_file = Log._get_log_file()
-        logging.basicConfig(
-            filename=log_file,
-            level=level,
-            format='%(asctime)s %(levelname)s: %(filename)s: %(funcName)s: %(message)s',
-            datefmt='%Y-%m-%d %H:%M:%S'
-        )
+    def _get_logger():
+        # Get or create a logger
+        logger = logging.getLogger("app_logger")
+        if not logger.hasHandlers():
+            log_file = Log._get_log_file()
+            handler = logging.FileHandler(log_file)
+            formatter = logging.Formatter('%(asctime)s %(levelname)s: %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
+            handler.setFormatter(formatter)
+            logger.addHandler(handler)
+            logger.setLevel(logging.INFO)
+        return logger
+
+    @staticmethod
+    def _get_caller_info():
+        # Get the caller's file and function name using the inspect module
+        frame = inspect.stack()[2]
+        filename = os.path.basename(frame.filename)
+        function_name = frame.function
+        return filename, function_name
 
     @staticmethod
     def INFO(msg):
-        Log.setup_logger(logging.INFO)
-        logging.info(msg)
+        logger = Log._get_logger()
+        filename, function_name = Log._get_caller_info()
+        logger.info(f"{filename}: {function_name}: {msg}")
 
     @staticmethod
     def WARNING(msg):
-        Log.setup_logger(logging.WARNING)
-        logging.warning(msg)
+        logger = Log._get_logger()
+        filename, function_name = Log._get_caller_info()
+        logger.warning(f"{filename}: {function_name}: {msg}")
 
     @staticmethod
     def ERROR(msg):
-        Log.setup_logger(logging.ERROR)
-        logging.error(msg)
+        logger = Log._get_logger()
+        filename, function_name = Log._get_caller_info()
+        logger.error(f"{filename}: {function_name}: {msg}")
 
     @staticmethod
     def DEBUG(msg):
-        Log.setup_logger(logging.DEBUG)
-        logging.debug(msg)
-
-# Example of how to use this class:
-# try:
-#     # Your code here
-# except Exception as e:
-#     Log.ERROR(e)
-
-# Log.INFO("This is an info message")
-# Log.WARNING("This is a warning message")
-# Log.DEBUG("This is a debug message")
+        logger = Log._get_logger()
+        filename, function_name = Log._get_caller_info()
+        logger.debug(f"{filename}: {function_name}: {msg}")
