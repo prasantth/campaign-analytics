@@ -1,0 +1,12 @@
+pandas
+psycopg2-binary
+openpyxl
+python-dotenv
+fastapi
+uvicorn
+sqlalchemy
+psycopg2-binary
+mkdocs
+mkdocs-material
+pytest
+httpx
