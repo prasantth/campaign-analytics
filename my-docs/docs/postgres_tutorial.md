@@ -31,8 +31,6 @@ Before running this script, ensure you have the following installed:
   DB_PORT=5432
   ```
 
-  Replace `your_database_name`, `your_database_user`, `your_database_password` with your actual PostgreSQL credentials.
-
 ## Excel Data
 
 Ensure that the Excel file `Kaya_Hometask_Data_Nike.xlsx` is present in the same directory as the script. The Excel file should contain three sheets:
