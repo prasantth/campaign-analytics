@@ -13,7 +13,7 @@ Unit tests were created to validate the individual components of the application
 These tests ensure that each function behaves correctly in isolation, reducing the likelihood of defects at the component level.
 
 ### 2. Integration Tests
-Integration tests were written to verify the interactions between different components of the application, such as:
+Integration tests were done manually to verify the interactions between different components of the application, such as:
 - **API Endpoints**: Testing the endpoints provided by the `campaigns` and `performance` routers to ensure that they return the correct responses, given valid and invalid inputs.
 - **Database Interaction**: Testing the integration between the FastAPI application and the PostgreSQL database to verify that data is stored, retrieved, and modified correctly.
 
