@@ -35,7 +35,7 @@ To set up the Campaign Analytics Platform on your local machine:
 
 2. **Navigate to the project directory**:
    ```bash
-   cd kaya
+   cd campaign-analytics
    ```
 
 3. **Install Docker**:
