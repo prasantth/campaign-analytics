@@ -7,6 +7,7 @@ Testing is an essential part of the development process to ensure the reliabilit
 
 ### 1. Unit Tests
 Unit tests were created to validate the individual components of the application, such as:
+
 - **Database Models**: Testing the SQLAlchemy models to ensure that database tables and relationships are defined correctly.
 - **Utility Functions**: Testing utility functions, such as logging, to confirm they perform as expected in different scenarios.
 
@@ -14,6 +15,7 @@ These tests ensure that each function behaves correctly in isolation, reducing t
 
 ### 2. Integration Tests
 Integration tests were done manually to verify the interactions between different components of the application, such as:
+
 - **API Endpoints**: Testing the endpoints provided by the `campaigns` and `performance` routers to ensure that they return the correct responses, given valid and invalid inputs.
 - **Database Interaction**: Testing the integration between the FastAPI application and the PostgreSQL database to verify that data is stored, retrieved, and modified correctly.
 
