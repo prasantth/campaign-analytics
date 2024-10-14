@@ -12,9 +12,7 @@ The FastAPI app has been structured into different modules to maintain scalabili
 
 ## API Details
 1. **Campaign Management**: The `campaigns` router provides endpoints to manage marketing campaigns. These endpoints allow users to:
-   - Create new campaigns.
-   - Retrieve campaign information.
-   - Update or delete campaigns as needed.
+      - Update campaign name.
 
 2. **Performance Analytics**: The `performance` router exposes endpoints for retrieving performance metrics of campaigns, including:
    - Getting time-series data (e.g., impressions, clicks, conversions) for specified date ranges.
@@ -26,7 +24,6 @@ The `main.py` file includes both routers, allowing users to interact with differ
 The entry point of the API is the `main.py` file, which performs the following functions:
 
 - Initializes the FastAPI application.
-- Creates tables in the PostgreSQL database if they do not already exist.
 - Includes the routers for campaigns and performance.
 - Uses `Uvicorn` to run the FastAPI app.
 
