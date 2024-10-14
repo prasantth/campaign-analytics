@@ -1,0 +1,52 @@
+site_name: Python Software Engineer Challenge
+
+theme:
+  name: material
+  highlight_theme: dracula
+  palette:
+    scheme: slate
+    primary: indigo
+    accent: deep_purple
+    # Custom color overrides
+    toggle:
+      icon: material/weather-night
+      name: slate
+    # Define light and dark mode colors (optional)
+    light:
+      primary: '5E00FF'
+      background: 'F2EAFF'
+      surface: 'FFFFFF'
+      accent: '726784'
+      text: '202222'
+    dark:
+      primary: '5E00FF'
+      background: '202222'
+      surface: '726784'
+      accent: 'F2EAFF'
+      text: 'FFFFFF'
+
+  font:
+    text: Roboto
+    code: Roboto Mono
+
+markdown_extensions:
+  - codehilite:
+      linenums: true
+  - pymdownx.superfences:
+      custom_fences:
+        - name: bash
+          class: bash
+          format: !!python/name:pymdownx.superfences.fence_code_format
+        - name: sql
+          class: sql
+          format: !!python/name:pymdownx.superfences.fence_code_format
+        - name: python
+          class: python
+          format: !!python/name:pymdownx.superfences.fence_code_format
+
+nav:
+  - Home: index.md
+  - Create Local Postgres DB: postgres_tutorial.md
+  - API Development: api_development.md
+  - Testing: testing.md
+  - Deployment: deployment.md
