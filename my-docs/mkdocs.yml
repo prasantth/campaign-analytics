@@ -48,5 +48,6 @@ nav:
   - Home: index.md
   - Create Local Postgres DB: postgres_tutorial.md
   - API Development: api_development.md
+  - API Sample Usage: how_to_use_api.md
   - Testing: testing.md
   - Deployment: deployment.md
